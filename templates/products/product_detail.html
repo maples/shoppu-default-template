@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block head %}
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$('.add_to_cart').click(function(){
+				var frm = $('#frm_add_cart');
+				frm.submit();
+			});
+		});
+	</script>	
+{% endblock %}
+
+{% block content %}
+    <div id="detail">
+        <h2>Product Details</h2>
+        <div id="thumb">
+            {% thumbnail product.photo "270x270" crop="center" as im %}
+    		    <div class="moldura"><img id="imagemDefault" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></div>
+    		{% endthumbnail %}            
+    		{% if product.images.count > 1 %}
+    		<ul class="thumbs">
+    		{% for image in product.images.all %}
+    				<li>
+    				{% thumbnail image "50x45" crop="center" as im %}
+    				    <a class="alterarFoto" href="{% thumbnail image "270x270" crop="center" as full %}{{ full.url }}{% endthumbnail %}">
+    				        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    				    </a>
+    				{% endthumbnail %}
+    				</li>
+    		{% endfor %}
+    		</ul>
+    		<script type="text/javascript" charset="utf-8">
+    		  $('.alterarFoto').click(function(){
+    		      var link = $(this).attr('href');
+    		      $('#imagemDefault').attr('src', link);
+    		      return false;
+      		  });
+    		</script>
+    		{% endif %}
+        </div>
+        <form action="product_detail_submit" method="get" accept-charset="utf-8">
+            <div>
+                <h3>{{product.title}}</h3>
+                <div>
+                    {{product.description|striptags|truncatewords:50}}
+                    <a href="#details">details</a>
+                </div>
+            </div>
+            <div id="price">
+                <label>Price</label>
+                <div>
+                    <strong class="price">R$ {{product.price|floatformat:2}}</strong>
+                </div>
+            </div>
+            <div class="buttons"><button type="submit" class="button blue">Add to Basket</button></div>            
+        </form>
+        <div class="description"><a name="details">{{product.description|safe}}</a></div>
+    </div>
+{% endblock %}

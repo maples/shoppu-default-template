@@ -10,6 +10,10 @@ TEMPLATE_DEBUG = DEBUG
 
 INTERNAL_IPS = ('127.0.0.1',)
 
+MEDIA_ROOT = os.path.join(PROJECT_ROOT_PATH, 'media')
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT_PATH, 'static')
+
 CURRENCIES = (
 ('BRL', 'Real'),
 ('USD', 'US Dollar'),
