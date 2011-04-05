@@ -1,0 +1,8 @@
+.DS_Store?
+.DS_Store
+
+shoppu_enviroment/*
+env/*
+enviroment/*
+
+*.pyc
