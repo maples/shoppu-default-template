@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/style.css" type="text/css" media="screen" charset="utf-8">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="main" class="container">
+        <div id="header">
+            {% block header %}{% endblock %}
+        </div>
+        {% block menu %}
+            <ul id="menu">
+                <li class="current"><a href="">Shop</a></li>
+                <li><a href="">Checkout</a></li>
+                <li><a href="">Help</a></li>
+            </ul>
+        {% endblock %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
