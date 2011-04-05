@@ -4,5 +4,7 @@
 shoppu_enviroment/*
 env/*
 enviroment/*
+media/cache/*
+media/products/*
 
 *.pyc
