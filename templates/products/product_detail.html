@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail store_currency %}
 
 {% block head %}
 	<script type="text/javascript" charset="utf-8">
@@ -14,7 +14,7 @@
 
 {% block content %}
     <div id="detail">
-        <h2>Product Details</h2>
+        <h2>Detalhes do produto</h2>
         <div id="thumb">
             {% thumbnail product.photo "270x270" crop="center" as im %}
     		    <div class="moldura"><img id="imagemDefault" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></div>
@@ -40,21 +40,21 @@
     		</script>
     		{% endif %}
         </div>
-        <form action="product_detail_submit" method="get" accept-charset="utf-8">
+        <form action="" method="get" accept-charset="utf-8">
             <div>
                 <h3>{{product.title}}</h3>
                 <div>
                     {{product.description|striptags|truncatewords:50}}
-                    <a href="#details">details</a>
+                    <a href="#details">detalhes</a>
                 </div>
             </div>
             <div id="price">
-                <label>Price</label>
+                <label>Pre&ccedil;o</label>
                 <div>
-                    <strong class="price">R$ {{product.price|floatformat:2}}</strong>
+                    <strong class="price">{{product.price|currency}}</strong>
                 </div>
             </div>
-            <div class="buttons"><button type="submit" class="button blue">Add to Basket</button></div>            
+            <div class="buttons"><button type="submit" class="button blue">Adicionar a sacola</button></div>            
         </form>
         <div class="description"><a name="details">{{product.description|safe}}</a></div>
     </div>

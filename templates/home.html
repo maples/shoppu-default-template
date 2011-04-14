@@ -1,19 +1,21 @@
 {% extends "base.html" %}
-{% load thumbnail currency %}
+{% load thumbnail store_currency  %}
 {% block content %}
     <h2>Destaques</h2>
     <ul class="destaques">
         {% for product in products %}
-            <li>
-                <h3>{{product.title}}</h3>
-                <div>
+            <li class="destaque">
+                <a href="{{product.get_absolute_url}}"><h3>{{product.title}}</h3></a>
+                <div class="moldura">
                     <a href="{{product.get_absolute_url}}">
-    				{% thumbnail product.photo "150x150" crop="center" as im %}
-    				    <img alt="{{product.title}}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    				{% thumbnail product.photo "190x190" crop="center" as im %}
+    				    <img class="thumb" alt="{{product.title}}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
     				{% endthumbnail %}				
     				</a>
                 </div>
-                <div><strong class="price">{{product.price|currency:store.currency}} </strong></div>
+                <div>
+                    <strong class="price">{{product.price|currency}} </strong>
+                </div>
             </li>
         {% endfor %}
     </ul>

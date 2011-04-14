@@ -42,7 +42,7 @@ h3 {
     padding-top:10px;
 }
 .price {
-    font-size: 1.1em;
+    font-size: 1.5em;
     white-space: nowrap;
     color: #F2632B;
 }
@@ -79,7 +79,7 @@ h3 {
     border: 1px solid #999999;
     margin-bottom: 5px;
     margin-top: 5px;
-    padding: 8px;
+    padding: 4px;
 }
 
 ul.thumbs {
@@ -189,9 +189,17 @@ h2 {
     padding:0;
 }
 
+.destaque .thumb{
+    background-color: #F5F5F5;
+    border: 1px solid #999999;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 2px;    
+}
 .destaques li{
     display: block;
-    height: 29em;
+    float: left;
+    height: 25em;
     margin: 0 2px 0 0;
     padding: 0;
     width: 197px;
