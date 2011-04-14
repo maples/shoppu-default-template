@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load thumbnail currency %}
+{% block content %}
+    <h2>Destaques</h2>
+    <ul class="destaques">
+        {% for product in products %}
+            <li>
+                <h3>{{product.title}}</h3>
+                <div>
+                    <a href="{{product.get_absolute_url}}">
+    				{% thumbnail product.photo "150x150" crop="center" as im %}
+    				    <img alt="{{product.title}}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    				{% endthumbnail %}				
+    				</a>
+                </div>
+                <div><strong class="price">{{product.price|currency:store.currency}} </strong></div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

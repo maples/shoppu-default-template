@@ -13,6 +13,7 @@ h2 {
 
 h3 {
     font-size: 1.1em;
+    color: #5A7FB2;
 }
 #detail form div div strong {
     display: block;
@@ -182,3 +183,16 @@ h2 {
 .button.small:active { padding: 4px 7px 2px; background-position: 0 top; }
 .button.large { font-size: 125%; padding: 7px 12px; }
 .button.large:active { padding: 8px 12px 6px; background-position: 0 top; }
+
+.destaques{
+    clear: both;
+    padding:0;
+}
+
+.destaques li{
+    display: block;
+    height: 29em;
+    margin: 0 2px 0 0;
+    padding: 0;
+    width: 197px;
+}
