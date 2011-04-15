@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail store_currency %}
 
 {% block head %}
 	<script type="text/javascript" charset="utf-8">
@@ -51,7 +51,7 @@
             <div id="price">
                 <label>Price</label>
                 <div>
-                    <strong class="price">R$ {{product.price|floatformat:2}}</strong>
+                    <strong class="price">{{product.price|currency:store.currency}}</strong>
                 </div>
             </div>
             <div class="buttons"><button type="submit" class="button blue">Add to Basket</button></div>            
