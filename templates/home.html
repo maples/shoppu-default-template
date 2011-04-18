@@ -5,7 +5,6 @@
     <ul class="destaques">
         {% for product in products %}
             <li class="destaque">
-                <a href="{{product.get_absolute_url}}"><h3>{{product.title}}</h3></a>
                 <div class="moldura">
                     <a href="{{product.get_absolute_url}}">
     				{% thumbnail product.photo "190x190" crop="center" as im %}
@@ -14,6 +13,7 @@
     				</a>
                 </div>
                 <div>
+                    <h3><a href="{{product.get_absolute_url}}">{{product.title}}</a></h3>
                     <strong class="price">{{product.price|currency}} </strong>
                 </div>
             </li>

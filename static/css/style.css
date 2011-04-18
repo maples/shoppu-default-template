@@ -7,14 +7,19 @@ body {
     min-width: 598px;
     padding: 0;
 }
+.container{
+    background: none repeat scroll 0 0 #FFFFFF;
+}
 h2 {
     color: #51443B;
 }
 
-h3 {
+h3, h3 a {
     font-size: 1.1em;
     color: #5A7FB2;
+    text-decoration: none;
 }
+
 #detail form div div strong {
     display: block;
     float: right;
