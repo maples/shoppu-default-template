@@ -6,4 +6,3 @@ TEMPLATE_DIRS = (
 )
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT_PATH, 'static')
