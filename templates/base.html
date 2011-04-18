@@ -30,6 +30,10 @@
                 <li><a href="">About</a></li>
             </ul>
         {% endblock %}
+        <div class="breadcrumb">
+            {% block breadcrumb %}
+            {% endblock %}
+        </div>
         <div id="content">
             {% block content %}{% endblock %}
         </div>

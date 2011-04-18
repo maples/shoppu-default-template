@@ -10,6 +10,12 @@ body {
 .container{
     background: none repeat scroll 0 0 #FFFFFF;
 }
+.breadcrumb{
+    clear: both;
+    background-color: #5A7FB2;
+    height:20px;
+}
+
 h2 {
     color: #51443B;
 }
