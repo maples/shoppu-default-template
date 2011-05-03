@@ -6,7 +6,7 @@
 <div id="cart">		
 	<h2>Carrinho de compras</h2>
 	{% if cart %}
-	<form class="qtyform" id="form-{{ item.id }}" action="{# url change-cart #}" method="post">
+	<form class="qtyform" id="form-{{ item.id }}" action="{% url change-cart %}" method="post">
 		{% csrf_token %}	
 	   <table class="carrinho">
     	<thead>
@@ -41,7 +41,7 @@
 	            </td>
 				<td>R$ {{ item.product.price|floatformat:2 }}</td>
 				<td class="remove">
-				    <a href="{# url remove-from-cart item.product.pk #}">Remover</a>
+				    <a href="{% url remove-from-cart item.product.pk %}">Remover</a>
 				</td>				
 				<td><strong>R$ {{item.subtotal|floatformat:2}}</strong></td>
 	       </tr>
