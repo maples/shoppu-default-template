@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block content %}
+<div id="cart">		
+	<h2>Carrinho de compras</h2>
+	{% if cart %}
+	<form class="qtyform" id="form-{{ item.id }}" action="{# url change-cart #}" method="post">
+		{% csrf_token %}	
+	   <table class="carrinho">
+    	<thead>
+    		<tr>
+    			<th>Descrição</th>
+    			<th>Quantidade</th>
+				<th>Pre&ccedil;o</th>
+				<th>Delete</th>
+				<th>Total</th>
+    		</tr>
+    	</thead>
+		<tbody>
+	       {% for item in cart %}
+	       <tr>
+				<td>
+					<div class="basket-images">
+						<a href="{{ item.product.content_object.get_absolute_url }}">
+							{% thumbnail item.product.content_object.photo "65x65" crop="center" as im %}
+							    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ item.product.product.title }}" />
+							{% endthumbnail %}
+						</a>
+					</div>
+					<div class="basket-desc">
+						<h3><a href="{{item.content_object.get_absolute_url}}">{{ item.product }}</a></h3>
+						{{ item.product.product.description|striptags|truncatewords:30 }}
+					</div>
+				</td>
+
+	            <td>
+	                <input type="hidden" name="cartitem-{{ forloop.counter }}" value="{{ item.id }}" />
+					<input type="text" class="quantity" size="3" name="quantity-{{ forloop.counter }}" id="id_quantity" value="{{ item.quantity }}" />
+	            </td>
+				<td>R$ {{ item.product.price|floatformat:2 }}</td>
+				<td class="remove">
+				    <a href="{# url remove-from-cart item.product.pk #}">Remover</a>
+				</td>				
+				<td><strong>R$ {{item.subtotal|floatformat:2}}</strong></td>
+	       </tr>
+	       {% endfor %}
+		</tbody>
+	   </table>
+	   <script type="text/javascript" charset="utf-8">
+	       $(document).ready(function() {
+	           $('.quantity').keyup(function(){
+	               var frm = $('.qtyform');
+	               frm.submit();
+	           });
+	       });
+	   </script>
+	   <div id="observacao">
+	       <p>Não está pronto para finalizar sua compra? <a href="{{store.get_absolute_url}}">Continue comprando</a>...</p>
+	   </div>
+	   <div id="total">
+			<div id="price">
+				<h3>Total: <span>R$ {{cart.order.subtotal|floatformat:2}}</span></h3>
+			</div>
+	   </div>
+	   <div class="buttons">
+	       <button class="button blue large" type="submit" name="update">Atualizar</button>	
+	       <button class="red button large" type="submit" name="checkout">Finalizar compra</button>	
+	   </div>
+	</form>
+	{% else %}	
+		<div class="alerta">Nenhum item adicionado.</div>
+		<div class="clear"></div>
+		<p>
+		    <a href="{{store.get_absolute_url}}">Retornar a loja</a>
+		</p>
+	{% endif %}
+</div>
+{% endblock %}

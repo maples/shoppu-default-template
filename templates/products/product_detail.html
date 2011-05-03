@@ -40,7 +40,9 @@
     		</script>
     		{% endif %}
         </div>
-        <form action="" method="get" accept-charset="utf-8">
+        <form action="{% url add-to-cart  %}" method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            <input type="hidden" name="product" value="{{product.pk}}"  />
             <div>
                 <h3>{{product.title}}</h3>
                 <div>
@@ -54,7 +56,21 @@
                     <strong class="price">{{product.price|currency}}</strong>
                 </div>
             </div>
-            <div class="buttons"><button type="submit" class="button blue">Adicionar a sacola</button></div>            
+            {% if product.variations.count > 1 %}
+                <select name="variation">
+                    {% for variation in product.variations.all  %}
+                        <option value="{{variation.pk}}">{{variation}}</option>
+                    {% endfor %}
+                </select>
+            {% else %} 
+                {% for variation in product.variations.all  %}
+                    <input type="hidden" name="variation" value="{{variation.pk}}" />    
+                {% endfor %}            
+            {% endif %}
+
+            <div class="buttons">
+                <button type="submit" class="button blue">Adicionar a sacola</button>
+            </div>            
         </form>
         <div class="description"><a name="details">{{product.description|safe}}</a></div>
     </div>
