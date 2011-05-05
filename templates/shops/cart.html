@@ -4,7 +4,7 @@
 
 {% block content %}
 <div id="cart">		
-	<h2>Carrinho de compras</h2>
+	<h1>Carrinho de compras</h1>
 	{% if cart %}
 	<form class="qtyform" id="form-{{ item.id }}" action="{% url change-cart %}" method="post">
 		{% csrf_token %}	
@@ -69,6 +69,8 @@
 	       <button class="red button large" type="submit" name="checkout">Finalizar compra</button>	
 	   </div>
 	</form>
+	
+	
 	{% else %}	
 		<div class="alerta">Nenhum item adicionado.</div>
 		<div class="clear"></div>
@@ -77,4 +79,5 @@
 		</p>
 	{% endif %}
 </div>
+
 {% endblock %}

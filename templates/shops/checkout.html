@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <h1>Meus dados</h1>
+	{% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+    <form class="leftLabel" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <div class="info">
+			<h2>Dados para contato</h2>
+			<div>campos com * são obrigatórios</div>
+		</div>
+        <ul>
+			{% for fieldset in form.fieldsets %}
+				{% if fieldset.legend %}
+	            <li class="section shipping">
+	        		<h3>{{ fieldset.legend }}</h3>
+	        		{% if fieldset.description %}<div>{{ fieldset.description }}</div>{% endif %}	
+	        	</li>
+				{% endif %}				
+	            {% for field in fieldset %}
+	    		<li class="{% if field.errors %}error{% endif %}">
+	    			<label class="desc" for="id_{{field.name}}">
+	    				{{field.label}}: {% if field.field.required %}<span class="req">*</span>{% endif %}
+	    			</label>
+    			    <div>{{field}}</div>
+	    			{% if field.errors %}<p class="error">{{field.errors}}</p>{% endif %}
+	    		</li>
+	            {% endfor %}
+			{% endfor %}
+			<div class="buttons">
+				<button type="submit" class="button blue large">Prosseguir</button>
+			</div>
+        </ul>
+    </form>
+{% endblock %}
