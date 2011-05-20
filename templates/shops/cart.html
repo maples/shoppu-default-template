@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load thumbnail %}
+{% load thumbnail store_currency %}
 
 {% block content %}
 <div id="cart">		
@@ -31,7 +31,6 @@
 					</div>
 					<div class="basket-desc">
 						<h3><a href="{{item.content_object.get_absolute_url}}">{{ item.product }}</a></h3>
-						{{ item.product.product.description|striptags|truncatewords:30 }}
 					</div>
 				</td>
 
@@ -39,11 +38,11 @@
 	                <input type="hidden" name="cartitem-{{ forloop.counter }}" value="{{ item.id }}" />
 					<input type="text" class="quantity" size="3" name="quantity-{{ forloop.counter }}" id="id_quantity" value="{{ item.quantity }}" />
 	            </td>
-				<td>R$ {{ item.product.price|floatformat:2 }}</td>
+				<td>{{ item.product.price|currency }}</td>
 				<td class="remove">
 				    <a href="{% url remove-from-cart item.product.pk %}">Remover</a>
 				</td>				
-				<td><strong>R$ {{item.subtotal|floatformat:2}}</strong></td>
+				<td><strong>{{item.subtotal|currency}}</strong></td>
 	       </tr>
 	       {% endfor %}
 		</tbody>
@@ -56,12 +55,29 @@
 	           });
 	       });
 	   </script>
-	   <div id="observacao">
-	       <p>Não está pronto para finalizar sua compra? <a href="{{store.get_absolute_url}}">Continue comprando</a>...</p>
-	   </div>
+	   
+       	<div class="frete">
+           <strong>Digite seu cep e calcule o frete</strong><br />
+           <label for="cep">CEP: </label><input type="text" class="text small" name="cep" value="" id="cep" alt="cep" maxlength="9" />
+           <button type="submit" name="shipping" class="button green large">Calcular Frete</button>
+           {% if shipping %}
+           <ul>
+               {% for sh  in shipping %}
+               <li>
+                   {{sh.Codigo}} : <strong>+{{sh.Valor|currency}}</strong>
+               </li>
+               {% endfor %}
+           </ul>
+           {% endif %}
+       	</div>
+
+ 	   <div id="observacao">
+ 	       <p>Não está pronto para finalizar sua compra? <a href="{{store.get_absolute_url}}">Continue comprando</a>...</p>
+ 	   </div>
+	   
 	   <div id="total">
 			<div id="price">
-				<h3>Total: <span>R$ {{cart.order.subtotal|floatformat:2}}</span></h3>
+				<h3>Total: <span>{{cart.order.subtotal|currency}}</span></h3>
 			</div>
 	   </div>
 	   <div class="buttons">
@@ -69,7 +85,6 @@
 	       <button class="red button large" type="submit" name="checkout">Finalizar compra</button>	
 	   </div>
 	</form>
-	
 	
 	{% else %}	
 		<div class="alerta">Nenhum item adicionado.</div>
