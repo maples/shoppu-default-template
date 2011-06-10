@@ -64,7 +64,7 @@
            <ul>
                {% for sh  in shipping %}
                <li>
-                   {{sh.Codigo}} : <strong>+{{sh.Valor|currency}}</strong>
+                   <input type="radio" id="frete-{{sh.Codigo}}" name="frete" value="{{sh.Codigo}}:{{sh.Valor}}" /><label for="frete-{{sh.Codigo}}">{{sh.Codigo}} : <strong>+{{sh.Valor|currency}}</strong></label>
                </li>
                {% endfor %}
            </ul>
@@ -74,12 +74,21 @@
  	   <div id="observacao">
  	       <p>Não está pronto para finalizar sua compra? <a href="{{store.get_absolute_url}}">Continue comprando</a>...</p>
  	   </div>
-	   
+ 	   
+ 	   {% if cart.order.shipping_cost %}
+	   <div id="frete">
+			<div id="price">
+				<h3>Frete: {{cart.order.shipping_method}} <span>{{cart.order.shipping_cost|currency}}</span></h3>
+			</div>
+	   </div>
+ 	   {% endif %}
+ 	   
 	   <div id="total">
 			<div id="price">
 				<h3>Total: <span>{{cart.order.subtotal|currency}}</span></h3>
 			</div>
 	   </div>
+	   
 	   <div class="buttons">
 	       <button class="button blue large" type="submit" name="update">Atualizar</button>	
 	       <button class="red button large" type="submit" name="checkout">Finalizar compra</button>	
