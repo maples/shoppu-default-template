@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load thumbnail store_currency %}
+{% block content %}
+    <h2>Confirmação do pedido.</h2>
+	<div>
+	    {% if order %}
+            <p>Prezado(a) {{order.billing_name}},</p>
+            <p>Seu pedido foi registrado com sucesso em nosso sistema com o número {{order.pk}}. Estamos aguardando a confirmação do pagamento para a liberação do produto.</p>
+	    {% endif %}
+    </div>    
+{% endblock %}

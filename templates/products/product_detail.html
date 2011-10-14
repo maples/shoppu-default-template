@@ -12,9 +12,16 @@
 	</script>	
 {% endblock %}
 
+{% block breadcrumb %}
+    <ul>
+        <li class="first"><a href="/">Home</a></li>
+        <li class="last">{{ product.title }}</li>
+    </ul>
+{% endblock  %}
+
 {% block content %}
     <div id="detail">
-        <h2>Detalhes do produto</h2>
+        <h2>{{ product.title }}</h2>
         <div id="thumb">
             {% thumbnail product.photo "270x270" crop="center" as im %}
     		    <div class="moldura"><img id="imagemDefault" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></div>
@@ -43,19 +50,30 @@
         <form action="{% url add-to-cart  %}" method="post" accept-charset="utf-8">
             {% csrf_token %}
             <input type="hidden" name="product" value="{{product.pk}}"  />
-            <div>
-                <h3>{{product.title}}</h3>
-                <div>
-                    {{product.description|striptags|truncatewords:50}}
-                    <a href="#details">detalhes</a>
-                </div>
-            </div>
             <div id="price">
-                <label>Pre&ccedil;o</label>
                 <div>
-                    <strong class="price">{{product.price|currency}}</strong>
+                    <strong class="price" id="value">{{product.price|currency}}</strong>
                 </div>
             </div>
+            <div>
+                <b>Em até 18 parcelas:</b>
+                <div id="flags">
+           			<span title="Visa" id="flag_visa">Visa</span>
+           			<span title="MasterCard" id="flag_mastercard">MasterCard</span>
+           			<span title="Diners" id="flag_diners">Diners</span>
+           			<span title="American Express" id="flag_americanexpress">American Express</span>
+           			<span title="Boleto" id="flag_boleto">Boleto</span>
+               </div>
+               <!-- 
+               <p>(<a href="#" rel="#overlay" class="id">Op&ccedil;oes de parcelamento</a>)</p>
+               <script language="JavaScript">
+                    $(function () {
+                        $("a[rel]").overlay();
+                    });
+               </script>
+               -->
+            </div>
+            
             {% if product.variations.count > 1 %}
                 <select name="variation">
                     {% for variation in product.variations.all  %}
@@ -74,4 +92,12 @@
         </form>
         <div class="description"><a name="details">{{product.description|safe}}</a></div>
     </div>
+    
+    <div class="overlay" id="overlay">
+    	<div class="overlay-detail">
+    	    <h2>Op&ccedil;oes de parcelamento</h2>
+    	    
+    	</div>
+    </div>
+        
 {% endblock %}

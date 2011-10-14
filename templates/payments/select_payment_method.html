@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <h1>Pagamento</h1>
+    {% if forms %}            
+        {% for f in forms %}
+            {{f}}
+        {% endfor %}
+    {% else %}
+        <span>Nenhum pagamento configurado.</span>
+    {% endif %}
+{% endblock %}

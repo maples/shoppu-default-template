@@ -1,0 +1,18 @@
+<ul id="menu">
+    <li class="current"><a href="/">Destaques</a></li>
+    {% for page in pages %}
+        {% if page.menu_title %}
+            <li>
+                <a href="{{ page.get_absolute_url }}">
+                    {{ page.menu_title }}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ page.get_absolute_url }}">
+                    {{ page.title }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

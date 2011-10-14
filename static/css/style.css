@@ -4,20 +4,77 @@ body {
     font-family: Arial,Helvetica,sans-serif;
     font-size: 0.795em;
     margin: 0 auto;
-    min-width: 598px;
+    min-width: 520px;
     padding: 0;
 }
+
 .container{
     background: none repeat scroll 0 0 #FFFFFF;
 }
-.breadcrumb{
+
+.menu {
     clear: both;
     background-color: #5A7FB2;
+    text-align: right;
+    padding: 2px;
+}
+
+.breadcrumb{
+    clear: both;
     height:20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.breadcrumb ul {
+    margin: 0;
+    padding: 0;
+    height: 21px;
+    display: block;
+    list-style: none;
+}
+
+.breadcrumb ul li {
+    display: block;
+    float: left;
+    position: relative;
+    height: 21px;
+    overflow: hidden;
+    line-height: 21px;
+    margin: 0px 6px 0px 0;
+    padding: 0px 10px 0px 0;
+    font-size: .9167em;
+    background: url(../images/Chevron.gif) no-repeat 100% 0;
+}
+
+.breadcrumb ul li a {
+    display: block;
+    position: relative;
+    height: 21px;
+    line-height: 21px;
+    overflow: hidden;
+    float: left;
+}
+
+.breadcrumb ul li.first a {
+    height: 16px !important;
+    text-indent: -1000em;
+    width: 16px;
+    padding: 0;
+    margin-top: 2px;
+    overflow: hidden;
+    background: url(../images/IconHome.gif) no-repeat 0 0;
+}
+
+.breadcrumb ul li.last {
+    background: none;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 h2 {
     color: #51443B;
+    font-size: 1.5em;
 }
 
 h3, h3 a {
@@ -50,10 +107,11 @@ h3, h3 a {
     overflow: hidden;
     border-top: 1px dotted #D8D8D8;
     margin: 1em 0 0;
-    padding-top:10px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 .price {
-    font-size: 1.5em;
+    font-size: 2em;
     white-space: nowrap;
     color: #F2632B;
 }
@@ -105,9 +163,6 @@ ul.thumbs li {
     margin-left: 2px;
 }
 
-h2 {
-    font-size: 1.5em;
-}
 #menu {
     float: left;
     font-weight: bold;
@@ -153,6 +208,7 @@ h2 {
     overflow: hidden;
     width: 100%;
     background-color: #F2F1EF;    
+    margin-bottom: 10px;
 }
 #content {
     clear: both;
@@ -212,6 +268,99 @@ h2 {
     float: left;
     height: 25em;
     margin: 0 2px 0 0;
-    padding: 0;
+    padding: 5px;
     width: 197px;
+}
+
+#flags {
+    clear: both;
+    padding: 5px;
+    overflow: hidden;
+}
+#flags span {
+    background: url("../images/sprite_flags.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 20px;
+    margin-right: 10px;
+    text-indent: -9999px;
+    width: 46px;
+}
+#flags #flag_visa {
+    background-position: -52px 0;
+}
+#flags #flag_mastercard {
+    background-position: -104px 0;
+}
+#flags #flag_diners {
+    background-position: -156px 0;
+}
+#flags #flag_americanexpress {
+    background-position: -207px 0;
+}
+#flags #flag_hipercard {
+    background-position: -259px 0;
+}
+#flags #flag_aura {
+    background-position: -311px 0;
+}
+#flags #flag_bradesco {
+    background-position: -363px 0;
+}
+#flags #flag_itau {
+    background-position: -415px 0;
+}
+#flags #flag_real {
+    background-position: -518px 0;
+}
+#flags #flag_bb {
+    background-position: -467px 0;
+}
+#flags #flag_banrisul {
+    background-position: -570px 0;
+}
+#flags #flag_boleto {
+    background-position: -622px 0;
+    margin-right: 0;
+}
+
+.overlay-detail{
+    
+}
+
+.overlay-detail {
+	padding: 10px;
+}
+	
+
+/* the overlayed element */
+.overlay {
+    
+    /* must be initially hidden */
+    display:none;
+    
+    /* place overlay on top of other elements */
+    z-index:10000;
+    
+    /* styling */
+    background-color:#fff;
+    
+    width:675px;    
+    min-height:200px;
+    border:1px solid #666;
+    
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;  
+}
+
+/* close button positioned on upper right corner */
+.overlay .close {
+    background-image:url(../images/close.png);
+    position:absolute;
+    right:-15px;
+    top:-15px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
 }

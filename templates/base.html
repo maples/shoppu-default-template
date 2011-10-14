@@ -1,3 +1,4 @@
+{% load thumbnail store_currency page_tags product_tags  %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
@@ -5,7 +6,12 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{STATIC_URL}}css/style.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="{{STATIC_URL}}css/form.css" type="text/css" media="screen" charset="utf-8">
+    
     <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}javascript/script.js"></script>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}favicon.ico" />
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -14,23 +20,26 @@
             {% block header %}
             <ul class="left">
             <li id="userChart">
-                <a title="Shopping Basket" class="bntBasket" href="">Sacola</a>
-                <strong>&nbsp;(<span id="shopBasketCount">0</span>&nbsp;article(s)&nbsp;:&nbsp;<span id="shopBasketPrice">R$ 0,00</span>)</strong>
+                <a href="{% url cart %}" title="Shopping Basket" class="bntBasket" href="">Sacola</a>
+                <strong>&nbsp;(<span id="shopBasketCount">{{cart|length}}</span>&nbsp;article(s)&nbsp;:&nbsp;<span id="shopBasketPrice">{{cart.subtotal|currency}}</span>)</strong>
             </li>
             </ul>            
             {% endblock %}
         </div>
-        <div class="signup">
-            <p><a href="#">Crie a sua propria loja</a></p>
+        <div class="menu">
+            {% block menu %}
+			{% show_menu %}
+            {% get_categories as categories %}
+			<form name="jump">
+			<select name="menu_category" onChange="location=document.jump.menu_category.options[document.jump.menu_category.selectedIndex].value;">
+	            <option>::Categorias::</option>
+                {% for category in categories %}
+                    <option  value="{% url product_by_category category.slug %}">{{ category }}</option>
+                {% endfor %}
+            </select>
+			</form>
+            {% endblock %}
         </div>
-        {% block menu %}
-            <ul id="menu">
-                <li class="current"><a href="/">Shop</a></li>
-                <li><a href="{% url cart  %}">Checkout</a></li>
-                <li><a href="">Help</a></li>
-                <li><a href="">About</a></li>
-            </ul>
-        {% endblock %}
         <div class="breadcrumb">
             {% block breadcrumb %}
             {% endblock %}
